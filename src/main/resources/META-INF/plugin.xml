@@ -1,0 +1,13 @@
+<!--suppress PluginXmlValidity, CheckTagEmptyBody -->
+<idea-plugin url="https://meanmail.dev/plugin/1">
+    <id>dev.meanmail.plugin</id>
+    <name>Intellij Plugin Template</name>
+    <version>SNAPSHOT</version>
+    <idea-version since-build="211"/>
+    <vendor email="plugin@meanmail.dev" url="https://meanmail.dev">meanmail</vendor>
+    <description></description>
+    <change-notes></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+</idea-plugin>
