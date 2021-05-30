@@ -23,10 +23,10 @@ dependencies {
 
 intellij {
     pluginName = config("pluginName")
-    version = if (config("IdeVersion") == "eap") {
+    version = if (config("ideVersion") == "eap") {
         "LATEST-EAP-SNAPSHOT"
     } else {
-        config("IdeVersion")
+        config("ideVersion")
     }
     type = config("ideType")
     val languages = config("languages").split(',').map {
