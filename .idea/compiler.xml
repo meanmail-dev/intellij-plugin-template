@@ -3,8 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="intellij-plugin-template" target="1.8" />
-      <module name="intellij-plugin-template.main" target="1.8" />
-      <module name="intellij-plugin-template.test" target="1.8" />
+      <module name="intellij-plugin-template.main" target="11" />
+      <module name="intellij-plugin-template.test" target="11" />
       <module name="plugin_template" target="1.8" />
       <module name="plugin_template.main" target="1.8" />
       <module name="plugin_template.test" target="1.8" />

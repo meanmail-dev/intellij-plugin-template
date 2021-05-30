@@ -8,7 +8,7 @@ repositories {
 
 plugins {
     java
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.10"
     id("org.jetbrains.intellij") version "0.7.2"
 }
 
@@ -19,10 +19,6 @@ version = "${config("version")}-${config("postfix")}"
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit:junit:4.13.2")
-}
-
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 intellij {
@@ -84,10 +80,16 @@ fun readChangeNotes(pathname: String): String {
             "/blob/master/CHANGES.md'>github</a>"
 }
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+    withType<JavaCompile> {
+        sourceCompatibility = config("jvmVersion")
+        targetCompatibility = config("jvmVersion")
     }
-
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = config("jvmVersion")
+    }
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = config("jvmVersion")
+    }
     withType<Wrapper> {
         distributionType = Wrapper.DistributionType.ALL
         gradleVersion = config("gradleVersion")
