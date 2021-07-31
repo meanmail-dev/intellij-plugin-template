@@ -8,8 +8,8 @@ repositories {
 
 plugins {
     java
-    kotlin("jvm") version "1.5.10"
-    id("org.jetbrains.intellij") version "0.7.2"
+    kotlin("jvm") version "1.5.21"
+    id("org.jetbrains.intellij") version "1.1.4"
 }
 
 group = "dev.meanmail"
@@ -22,26 +22,28 @@ dependencies {
 }
 
 intellij {
-    pluginName = config("pluginName")
-    version = if (config("ideVersion") == "eap") {
-        "LATEST-EAP-SNAPSHOT"
-    } else {
-        config("ideVersion")
-    }
-    type = config("ideType")
+    pluginName.set(config("pluginName"))
+    version.set(
+        if (config("ideVersion") == "eap") {
+            "LATEST-EAP-SNAPSHOT"
+        } else {
+            config("ideVersion")
+        }
+    )
+    type.set(config("ideType"))
     val languages = config("languages").split(',').map {
         it.trim().toLowerCase()
     }
     if ("python" in languages) {
-        when (type) {
+        when (type.get()) {
             "PY" -> {
-                setPlugins("python")
+                plugins.add("python")
             }
             "PC" -> {
-                setPlugins("PythonCore")
+                plugins.add("PythonCore")
             }
             else -> {
-                setPlugins("PythonCore:${config("PythonCore")}")
+                plugins.add("PythonCore:${config("PythonCore")}")
             }
         }
     }
@@ -102,13 +104,13 @@ tasks {
     }
 
     patchPluginXml {
-        setPluginDescription(file("description.html").readText())
-        setChangeNotes(readChangeNotes("CHANGES.md"))
+        pluginDescription.set(file("description.html").readText())
+        changeNotes.set(readChangeNotes("CHANGES.md"))
     }
 
     publishPlugin {
         dependsOn("buildPlugin")
-        setToken(System.getenv("PUBLISH_TOKEN"))
-        setChannels(listOf(config("publishChannel")))
+        token.set(System.getenv("PUBLISH_TOKEN"))
+        channels.set(listOf(config("publishChannel")))
     }
 }
